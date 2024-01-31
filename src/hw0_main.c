@@ -1,4 +1,3 @@
-
 #include <stdio.h>
 #include <stdbool.h>
 
@@ -18,9 +17,10 @@ int main() {
         int currVal = input - 1;
         int total = data[currVal];
         data[currVal] = 0;
+
         while(total > 0) {
             currVal = (currVal + 1) % 5; 
-            if (currVal == 4) {
+            if (currVal == 4) { 
                 ruma++;
             } else {
                 data[currVal]++;
@@ -28,12 +28,13 @@ int main() {
             total--;
             if (total == 0) {
                 if (currVal == 4) {
-                    break; 
+                    break;
                 } else if (data[currVal] > 1) { 
+                    printf("%d %d %d %d | %d\n", data[0], data[1], data[2], data[3], ruma);
                     printf("Last piece landed in section %d. Continue sowing seeds!\n", currVal + 1);
                     total = data[currVal];
                     data[currVal] = 0;
-                } else if (data[currVal] == 1 && currVal != 4) { 
+                } else if (data[currVal] == 1 && currVal != 4) {
                     printf("%d %d %d %d | %d\n", data[0], data[1], data[2], data[3], ruma);
                     printf("You lost because the last counter fell into section %d.\n", currVal + 1);
                     done = true;
@@ -45,9 +46,6 @@ int main() {
             done = true;
         }
     }
-
-
-
     return 0;
-
 }
+
