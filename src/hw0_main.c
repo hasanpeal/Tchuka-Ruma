@@ -5,21 +5,14 @@ int main() {
     int data[4] = {2, 2, 2, 2};
     int ruma = 0;
     int input;
-    char newline;
     bool done = false;
 
     while (!done) {
         printf("%d %d %d %d | %d\n", data[0], data[1], data[2], data[3], ruma);
         printf("Choose a section (1-4): ");
-        while (true) {
-            if (scanf("%d%c", &input, &newline) != 2 || newline != '\n') {
-                printf("Invalid choice. Choose a section (1-4): ");
-                while (getchar() != '\n'); 
-            } else if (input < 1 || input > 4 || data[input - 1] == 0) {
-                printf("Invalid choice. Choose a section (1-4): ");
-            } else {
-                break;
-            }
+        while(scanf("%d", &input) != 1 || input < 1 || input > 4 || data[input - 1] == 0) {
+            printf("Invalid choice. Choose a section (1-4): ");
+            while(getchar() != '\n');
         }
         int currVal = input - 1;
         int total = data[currVal];
