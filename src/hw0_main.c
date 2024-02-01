@@ -10,17 +10,27 @@ int main() {
     while (!done) {
         printf("%d %d %d %d | %d\n", data[0], data[1], data[2], data[3], ruma);
         printf("Choose a section (1-4): ");
-        while(scanf("%d", &input) != 1 || input < 1 || input > 4 || data[input - 1] == 0) {
-            printf("Invalid choice. Choose a section (1-4): ");
-            while(getchar() != '\n');
+
+        while (true) {
+            if (scanf("%d", &input) != 1) {
+                while (getchar() != '\n'); 
+                printf("Invalid choice. Choose a section (1-4): ");
+                continue;
+            }
+            if (input < 1 || input > 4 || data[input - 1] == 0) {
+                printf("Invalid choice. Choose a section (1-4): ");
+                continue;
+            }
+            break; 
         }
+
         int currVal = input - 1;
         int total = data[currVal];
         data[currVal] = 0;
 
-        while(total > 0) {
-            currVal = (currVal + 1) % 5; 
-            if (currVal == 4) { 
+        while (total > 0) {
+            currVal = (currVal + 1) % 5;
+            if (currVal == 4) {
                 ruma++;
             } else {
                 data[currVal]++;
@@ -28,8 +38,8 @@ int main() {
             total--;
             if (total == 0) {
                 if (currVal == 4) {
-                    break;
-                } else if (data[currVal] > 1) { 
+                    break; // Continue the game
+                } else if (data[currVal] > 1) {
                     printf("%d %d %d %d | %d\n", data[0], data[1], data[2], data[3], ruma);
                     printf("Last piece landed in section %d. Continue sowing seeds!\n", currVal + 1);
                     total = data[currVal];
@@ -46,6 +56,8 @@ int main() {
             done = true;
         }
     }
+
     return 0;
 }
+
 
